@@ -9,21 +9,42 @@ class JournalController extends Controller{
         $session = $sessionModel->getSessionById($session_id);
 
         $journalModel = new Journal();
+        $existingCount = $journalModel->countAnswersByDateId($session_id);
 
-        $QList = $journalModel->getSessionQuestions($session_id); //from answers table 
-        $questions=[];
-        if(!$QList){
-            for ($i =0; $i<3; $i++){
-                $q = $journalModel->getRandomQuestion(); //from questions table
-                $questions[] =$q;
-            };
-        }else{
-            foreach ($QList as $q){
-            $questionData = $journalModel->getQuestionByID($q['question_id']);
-            $questions[] = $questionData;
+    if ($existingCount >= 3) {
+        $questions = $journalModel->getSessionQuestions($session_id);
+    } else {
+        $questions = $this->getJournalQuestions($session_id, $journalModel);
+    }
+    $hasAnswers = $this->IsAllQuestionsAnswered($questions);
+    // var_dump($hasAnswers);
+    // exit;
+    $this->view("journal/index",['session'=>$session,'questions'=> $questions, 'hasAnswers' => $hasAnswers]);
+    }
+
+    private function IsAllQuestionsAnswered($questions){
+        foreach($questions as $q){
+        if(is_null($q['answer'])){
+            return false;
             }
         }
-        $this->view("journal/index",['session'=>$session,'questions'=> $questions,'savedAnswers'=>$QList]);
+        return true;
+    }
+
+    private function getJournalQuestions($session_id,$journalModel,$questions =[], $i =3){
+        if($i == 0){
+            return $questions;
+        }
+        $q = $journalModel->getRandomQuestion();
+        $ids = array_column($questions, "id");
+        if (in_array($q["id"], $ids)){
+           return $this->getJournalQuestions($session_id,$journalModel,$questions, $i);
+        }else{
+            $questions[] =$q;
+            $journalModel->insertOuestionsOfTheDay($session_id,$q["id"]);
+            return $this->getJournalQuestions($session_id,$journalModel,$questions, $i-1);
+        }
+        
     }
 
     public function AddJournal(){
@@ -37,7 +58,7 @@ class JournalController extends Controller{
         for ($i=0; $i<3 ; $i++){
             $answer =$answers[$i];
             $q_id =$quetions_id[$i];
-            $journalModel->SaveAnswers($session_id,$q_id,$answer);
+            $journalModel->updateAnswers($answer,$session_id,$q_id);
         }
         
         $_SESSION['success'] = "Answers saved successfully!";
@@ -51,6 +72,7 @@ class JournalController extends Controller{
         $journalModel = new Journal();  
         $answers = $_POST['answer'];
         $quetions_id = $_POST['question_id'];
+
 
         for ($i=0; $i<3 ; $i++){
             $answer =$answers[$i];

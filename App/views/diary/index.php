@@ -19,9 +19,7 @@
 
         <form method="POST" action="diary" id="diary-form">
             <div class="mb-3">
-                <textarea class="form-control" name="content" id="content" rows="6" placeholder="Dear Diary...">
-                    <?php if (isset( $diary['content'])) echo $diary['content']; ?>
-                </textarea>
+                <textarea class="form-control" name="content" id="content" rows="6" placeholder="Dear Diary..."><?php if (isset( $diary['content'])) echo $diary['content']; ?></textarea>
             </div>
             <button type="submit" id="save-btn" class="btn btn-primary"
                 <?php if (isset( $diary['content'])) echo 'disabled'; ?>>
@@ -44,27 +42,36 @@
 
 
 <script>
-    const form = document.getElementById('diary-form');
-    const textarea = document.getElementById('content');
-    const saveBtn = document.getElementById('save-btn');
-    const updateBtn = document.getElementById('update-btn');
-    const originalContent = textarea.value.trim();
+      const form = document.getElementById('journal-form');
+        const saveBtn = document.getElementById('save-btn');
+        const updateBtn = document.getElementById('update-btn');
 
-    textarea.addEventListener('input', function () {
-        const current = textarea.value.trim();
+        // Snapshot the form data on page load
+        const originalData = new FormData(form);
+        const originalString = new URLSearchParams(originalData).toString();
 
-        if (current !== originalContent) {
-            saveBtn.classList.add('d-none');
-            updateBtn.classList.remove('d-none');
-            form.action = 'diary/update';
-        } else {
-            saveBtn.classList.remove('d-none');
-            updateBtn.classList.add('d-none');
-            form.action = 'diary';
-        }
-    });
-</script>
-    <!-- إضافة JS الخاصة بـ Bootstrap -->
+        // ✅ Fix 2: check if this is an existing entry (any textarea has content)
+        const textareas = form.querySelectorAll('textarea');
+        const isExisting = Array.from(textareas).some(ta => ta.value.trim() !== '');
+
+        form.addEventListener('input', function () {
+            const currentString = new URLSearchParams(new FormData(form)).toString();
+
+            if (isExisting) {
+                // Editing saved answers — toggle between save/update based on changes
+                if (currentString !== originalString) {
+                    saveBtn.classList.add('d-none');
+                    updateBtn.classList.remove('d-none');
+                    form.action = 'journal/update';
+                } else {
+                    saveBtn.classList.remove('d-none');
+                    updateBtn.classList.add('d-none');
+                    form.action = 'journal';
+                }
+            }
+            // If new entry, save button stays visible — no action change needed
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

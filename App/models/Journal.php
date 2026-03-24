@@ -18,14 +18,24 @@ class Journal extends Model{
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    public function insertOuestionsOfTheDay($date_id,$question_id){
+        $stmt = $this->db->prepare("INSERT INTO answers (date_id, question_id, answer) VALUES (?,?, NULL)");
+        $stmt->execute([$date_id, $question_id]);
+    }
 
     public function SaveAnswers($date_id, $question_id,$answer){
         $stmt = $this->db->prepare("INSERT INTO answers (date_id, question_id , answer) VALUES (?, ?, ?)");
         $stmt->execute([$date_id, $question_id,$answer]);
     }
 
-    public function updateAnswers($answer,$date_id, $question_id,){
+    public function updateAnswers($answer,$date_id, $question_id){
         $stmt = $this->db->prepare("UPDATE answers SET answer=? WHERE date_id =? AND question_id =?");
         $stmt->execute([$answer, $date_id, $question_id]);
     }
+
+    public function countAnswersByDateId($date_id) {
+    $stmt = $this->db->prepare("SELECT COUNT(*) FROM answers WHERE date_id = ?");
+    $stmt->execute([$date_id]);
+    return (int) $stmt->fetchColumn();
+}
 }
