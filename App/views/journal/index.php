@@ -15,7 +15,7 @@
                 <?php $date = new DateTime($session['date']);
                 echo $date->format('l, F j, Y'); ?>
             </h6>
-            <h1 class="mb-2">Journal</h1>
+            <h1 class="display-6 fw-bold">Journal</h1>
             <h4 class="mb-4">Answer These Questions</h4>
             <form method="POST" action="journal" class="card p-4 shadow-sm" id="journal-form">
                 <?php for ($i = 0; $i < 3; $i++): ?>

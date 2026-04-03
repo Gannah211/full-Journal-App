@@ -15,7 +15,7 @@
             echo $date->format('l, F j, Y'); ?>
         </h6>
 
-        <h1 class="mb-3">Todo List</h1>
+            <h1 class="display-6 fw-bold">Todo List</h1>
         <h3 class="mb-4 text-secondary">Small steps every day make big changes.</h3>
 
         <form method="POST" action="todo/create" class="row g-2 mb-4">

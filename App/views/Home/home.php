@@ -16,7 +16,7 @@
             <?php $date = new DateTime('now');
             echo $date->format('l, F j, Y'); ?>
         </h6>
-        <h1 class="display-5">
+            <h1 class="display-6 fw-bold">
             <?php if(!empty($_SESSION['user_id'])):?>
                 Welcome <?php echo $user['username'] ?>
             <?php else:?>

@@ -14,7 +14,7 @@
             <?php $date = new DateTime($session['date']);
             echo $date->format('l, F j, Y'); ?>
         </h6>
-        <h1 class="mb-3">Diary</h1>
+            <h1 class="display-6 fw-bold">Diary</h1>
         <h3 class="mb-4">How was your day?</h3>
 
         <form method="POST" action="diary" id="diary-form">
