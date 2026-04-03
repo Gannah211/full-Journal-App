@@ -4,6 +4,8 @@ require_once "../App/models/Todo.php";
 
 class TodoController extends Controller{
     public function TodoForm(){
+        $this->requireLogin();
+
         $session_id = $_SESSION['journal_session_id'];
 
         $sessionModel = new SessionModel();

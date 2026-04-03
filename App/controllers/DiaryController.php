@@ -4,6 +4,8 @@ require_once "../App/models/Session.php";
 
 class DiaryController extends Controller{
     public function DiaryForm(){
+        $this->requireLogin();
+
         $session_id = $_SESSION['journal_session_id'];
         $sessionModel = new SessionModel();
         $session = $sessionModel->getSessionById($session_id);

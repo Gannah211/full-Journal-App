@@ -23,7 +23,7 @@
                             <?php echo $questions[$i]['question'] ?>
                          </label>
                         <textarea class="form-control" id="<?php echo "question" . $i ?>" name="answer[<?php echo $i ?>]" rows="3"><?php if (isset($questions[$i]['answer'])) echo $questions[$i]['answer'] ?></textarea>
-                        <input type="hidden" name="question_id[<?php echo $i ?>]" value="<?php echo $questions[$i]['question_id']; ?>">
+                        <input type="hidden" name="question_id[<?php echo $i ?>]" value="<?php echo $questions[$i]['question_id'] ?? $questions[$i]['id'] ?>">
             <?php endfor; ?>
             <br>
              <button type="submit" id="save-btn" class="btn btn-primary" <?php if ($hasAnswers) echo 'disabled'; ?>>

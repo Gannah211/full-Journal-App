@@ -1,7 +1,7 @@
 <?php
 require_once "../App/models/User.php";
 $userModel =new User();
-$user = $userModel->findByID($_SESSION['user_id']);
+$user = isset($_SESSION['user_id'])?$userModel->findByID($_SESSION['user_id']):null;
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded mb-4 px-3">
@@ -12,7 +12,10 @@ $user = $userModel->findByID($_SESSION['user_id']);
         <a class="nav-link" href="/JOURNALAPP/public/journal">Journal</a>
         <a class="nav-link" href="/JOURNALAPP/public/todo">Todo</a>
     </div>
+    <?php if(!empty($user)) :?>
     <a class="nav-link navbar-nav me-3 " href="#">Hello, <?php echo $user['username'] ?> !</a>
     <a class="nav-link navbar-nav " href="/JOURNALAPP/public/logout">Logout</a>
-
+    <?php else:?>
+        <a class="nav-link navbar-nav " href="/JOURNALAPP/public/login">Login</a>
+    <?php endif; ?>
 </nav>

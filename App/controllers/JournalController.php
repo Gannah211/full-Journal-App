@@ -4,6 +4,8 @@ require_once "../App/models/Session.php";
 
 class JournalController extends Controller{
     public function JournalForm(){
+        $this->requireLogin();
+
         $session_id = $_SESSION['journal_session_id'];
         $sessionModel = new SessionModel();
         $session = $sessionModel->getSessionById($session_id);
@@ -17,14 +19,14 @@ class JournalController extends Controller{
         $questions = $this->getJournalQuestions($session_id, $journalModel);
     }
     $hasAnswers = $this->IsAllQuestionsAnswered($questions);
-    // var_dump($hasAnswers);
+    // var_dump($questions);
     // exit;
     $this->view("journal/index",['session'=>$session,'questions'=> $questions, 'hasAnswers' => $hasAnswers]);
     }
 
     private function IsAllQuestionsAnswered($questions){
         foreach($questions as $q){
-        if(is_null($q['answer'])){
+        if(empty($q['answer'])){
             return false;
             }
         }

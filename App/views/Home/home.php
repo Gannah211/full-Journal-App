@@ -12,10 +12,16 @@
 
     <div class="text-center mb-4">
         <h6 class="text-muted">
-            <?php $date = new DateTime($session['date']);
+            <?php $date = new DateTime('now');
             echo $date->format('l, F j, Y'); ?>
         </h6>
-        <h1 class="display-5">Welcome <?php echo $user['username'] ?></h1>
+        <h1 class="display-5">
+            <?php if(!empty($_SESSION['user_id'])):?>
+                Welcome <?php echo $user['username'] ?>
+            <?php else:?>
+                Welcome to Journal App
+            <?php endif;?>        
+        </h1>
     </div>
 
     <!-- the new part -->

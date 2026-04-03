@@ -14,11 +14,15 @@ class AuthController extends Controller{
         $userModel = new User();
 
         $user = $userModel->findByUsername($username);
-        if (password_verify($password, $user['password'])) {
-        session_start();
+        if ($user && password_verify($password, $user['password'])) {
+        // session_start();
         $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_name'] = $user['name'];
          header("Location: /JOURNALAPP/public/home");
         exit;
+        }else{
+            header("location: /JOURNALAPP/public/login?error=1");
+            exit;
         }
        
     }
@@ -43,7 +47,7 @@ class AuthController extends Controller{
     public function logout() {
     session_start();
     session_destroy();
-    header("Location: /JOURNALAPP/public/login");
+    header("Location: /JOURNALAPP/public/home");
     exit();
 }
 }
