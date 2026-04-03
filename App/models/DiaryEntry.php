@@ -13,4 +13,9 @@ class DiaryEntry extends Model{
         $stmt = $this->db->prepare("UPDATE diary SET content =? WHERE date_id = ? ");
         $stmt->execute([$content,$session_id]);
     }
+    public function getAllDiaryEnteries($user_id){
+        $stmt = $this->db->prepare("SELECT d.content, s.date FROM diary d JOIN date s ON d.date_id = s.id WHERE d.user_id = ?");
+        $stmt->execute([$user_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

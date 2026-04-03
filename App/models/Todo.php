@@ -34,5 +34,10 @@ class Todo extends Model{
         $stmt->execute([$status, $id]);
 
     }
+    public function getUserAllTasks($user_id){
+        $stmt =$this->db->prepare("SELECT t.content,t.priority, t.is_done, d.date FROM date d JOIN todolist td ON d.id =td.date_id JOIN task t ON td.id = t.todo_id WHERE d.user_id= ?;");
+        $stmt->execute([$user_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }

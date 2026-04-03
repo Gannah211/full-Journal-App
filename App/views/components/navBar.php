@@ -11,6 +11,8 @@ $user = isset($_SESSION['user_id'])?$userModel->findByID($_SESSION['user_id']):n
         <a class="nav-link" href="/JOURNALAPP/public/diary">Diary</a>
         <a class="nav-link" href="/JOURNALAPP/public/journal">Journal</a>
         <a class="nav-link" href="/JOURNALAPP/public/todo">Todo</a>
+        <a class="nav-link" href="/JOURNALAPP/public/history">History</a>
+
     </div>
     <?php if(!empty($user)) :?>
     <a class="nav-link navbar-nav me-3 " href="#">Hello, <?php echo $user['username'] ?> !</a>

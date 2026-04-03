@@ -37,5 +37,12 @@ class Journal extends Model{
     $stmt = $this->db->prepare("SELECT COUNT(*) FROM answers WHERE date_id = ?");
     $stmt->execute([$date_id]);
     return (int) $stmt->fetchColumn();
-}
+    }
+
+    public function getUserJournals($user_id){
+        $stmt = $this->db->prepare("SELECT q.question, a.answer,d.date FROM questions q JOIN answers a ON q.id =a.question_id JOIN date d ON a.date_id = d.id WHERE d.user_id= ?");
+        $stmt->execute([$user_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }
