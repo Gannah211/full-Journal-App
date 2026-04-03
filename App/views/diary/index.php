@@ -7,7 +7,7 @@
     <title>Diary</title>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <?php require_once "../App/views/components/navBar.php" ?>
     <div class="container">
         <h6 class="text-muted">
@@ -46,11 +46,9 @@
         const saveBtn = document.getElementById('save-btn');
         const updateBtn = document.getElementById('update-btn');
 
-        // Snapshot the form data on page load
         const originalData = new FormData(form);
         const originalString = new URLSearchParams(originalData).toString();
 
-        // ✅ Fix 2: check if this is an existing entry (any textarea has content)
         const textareas = form.querySelectorAll('textarea');
         const isExisting = Array.from(textareas).some(ta => ta.value.trim() !== '');
 
@@ -69,10 +67,11 @@
                     form.action = 'journal';
                 }
             }
-            // If new entry, save button stays visible — no action change needed
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+ <?php require_once "../App/views/components/footer.php" ?>
+
 </body>
 
 </html>

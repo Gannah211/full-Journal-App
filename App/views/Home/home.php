@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="/JOURNALAPP/public/style/sketchy.css">
 </head>
 
-<body class="container mt-5">
+<body class="d-flex flex-column min-vh-100">
+<div class="container mt-5 flex-fill">
     <?php require_once "../App/views/components/navBar.php" ?>
 
     <div class="text-center mb-4">
@@ -61,6 +62,8 @@
         </div>
 
     </div>
+</div>
+<?php require_once "../App/views/components/footer.php" ?>
 </body>
 
 </html>

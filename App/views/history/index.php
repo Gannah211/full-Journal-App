@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>History</title>
     <link rel="stylesheet" href="/JOURNALAPP/public/style/sketchy.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100"> 
     <?php require_once "../App/views/components/navBar.php" ?>
-
+<div class="flex-fill">
     <div class="text-center mb-4">
         <h1 class="display-6 fw-bold">History</h1>
+        <p class="text-muted">A place to see the old version of you</p>
     </div>
 
     <div class="row g-4 mt-3">
@@ -45,8 +46,10 @@
                 </div>
             </a>
         </div>
-
     </div>
+    </div>
+<?php require_once "../App/views/components/footer.php" ?>
+
 </body>
 
 </html>
