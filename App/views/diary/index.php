@@ -42,7 +42,7 @@
 
 
 <script>
-      const form = document.getElementById('journal-form');
+      const form = document.getElementById('diary-form');
         const saveBtn = document.getElementById('save-btn');
         const updateBtn = document.getElementById('update-btn');
 
@@ -60,11 +60,11 @@
                 if (currentString !== originalString) {
                     saveBtn.classList.add('d-none');
                     updateBtn.classList.remove('d-none');
-                    form.action = 'journal/update';
+                    form.action = 'diary/update';
                 } else {
                     saveBtn.classList.remove('d-none');
                     updateBtn.classList.add('d-none');
-                    form.action = 'journal';
+                    form.action = '/diary';
                 }
             }
         });

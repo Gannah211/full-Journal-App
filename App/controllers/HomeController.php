@@ -16,7 +16,6 @@ class HomeController extends Controller{
         $_SESSION['journal_session_id'] = $session_id;
         $session = $sessionModel->getSessionById($session_id);
         }
-       
         $this->view("Home/home", ['session'=>$session ,'user'=>$user]);
     }
 }

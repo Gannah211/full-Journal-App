@@ -2,7 +2,6 @@
 
 class SessionModel extends Model{
     public function findTodaySession($user_id){
-        // $today = date('l, F m, Y');
         $today = date('Y-m-d');
         $stmt = $this->db->prepare("SELECT * FROM date WHERE user_id = ? AND date = ?");
         $stmt->execute([$user_id, $today]);
