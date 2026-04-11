@@ -24,6 +24,8 @@ $router->post('/journal/update','JournalController@updateanswers');
 $router->get('/todo','TodoController@TodoForm');
 $router->post('/todo/create','TodoController@createTodo');
 $router->post('/todo/check','TodoController@checkTask');
+$router->post('/todo/delete','TodoController@deleteTask');
+
 
 $router->get('/history','HistoryController@index');
 $router->get('/history/Diary','HistoryController@getDiary');

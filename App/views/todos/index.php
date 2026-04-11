@@ -64,6 +64,10 @@ function SelectTaskColor($priority) {
                                 </label>
                             </div>
                         </form>
+                        <form method="POST" action="/JOURNALAPP/public/todo/delete" style="display:inline;">
+                            <input type="hidden" name="id" value="<?php echo $task['task_id']; ?>">
+                            <button type="submit" class="btn btn-danger  btn-outline-primary">Delete</button>
+                        </form>
                     </li>
                 <?php endforeach; ?>
             </ul>

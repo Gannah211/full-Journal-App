@@ -39,5 +39,9 @@ class Todo extends Model{
         $stmt->execute([$user_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function deleteTask($id){
+        $stmt = $this->db->prepare("DELETE FROM task WHERE id = ?");
+        $stmt->execute([$id]);
+    }
 
 }

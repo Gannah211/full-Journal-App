@@ -44,6 +44,13 @@ class TodoController extends Controller{
         header("Location: /JOURNALAPP/public/todo");
         exit;
     }
-  
+    public function deleteTask(){
+        $id = $_POST['id'];
+        $todoModel = new Todo();
+//        $taskId = $_POST['taskId'];
+        $todoModel->deleteTask($id);
+        header("Location: /JOURNALAPP/public/todo");
+        exit;
+    }
 
 }
