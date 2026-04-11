@@ -8,8 +8,8 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <?php require_once "../App/views/components/navBar.php" ?>
-    <div class="container">
+<?php require_once ($_SERVER['DOCUMENT_ROOT'].'/JournalApp/App/views/components/navBar.php') ?>
+ <div class="container">
         <h6 class="text-muted">
             <?php $date = new DateTime($session['date']);
             echo $date->format('l, F j, Y'); ?>
@@ -70,7 +70,7 @@
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
- <?php require_once "../App/views/components/footer.php" ?>
+ <?php require_once ($_SERVER['DOCUMENT_ROOT'].'/JournalApp/App/views/components/footer.php') ?>
 
 </body>
 

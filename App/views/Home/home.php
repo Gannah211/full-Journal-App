@@ -9,7 +9,7 @@
 
 <body class="d-flex flex-column min-vh-100">
 <div class="container mt-5 flex-fill">
-    <?php require_once "../App/views/components/navBar.php" ?>
+    <?php require_once ($_SERVER['DOCUMENT_ROOT'].'/JournalApp/App/views/components/navBar.php') ?>
 
     <div class="text-center mb-4">
         <h6 class="text-muted">
@@ -63,7 +63,7 @@
 
     </div>
 </div>
-<?php require_once "../App/views/components/footer.php" ?>
+<?php require_once ($_SERVER['DOCUMENT_ROOT'].'/JournalApp/App/views/components/footer.php') ?>
 </body>
 
 </html>

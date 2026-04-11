@@ -8,7 +8,7 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-        <?php require_once "../App/views/components/navBar.php" ?>
+<?php require_once ($_SERVER['DOCUMENT_ROOT'].'/JournalApp/App/views/components/navBar.php') ?>
     <div class="flex-fill">
         <div class="container">
             <h6 class="text-muted">
@@ -37,7 +37,7 @@
             </form>
         </div>
     </div>
-<?php require_once "../App/views/components/footer.php" ?>
+<?php require_once ($_SERVER['DOCUMENT_ROOT'].'/JournalApp/App/views/components/footer.php') ?>
 
     <?php if (isset($_SESSION['success'])): ?> <script>
         alert("<?php echo $_SESSION['success']; ?>");
