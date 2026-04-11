@@ -1,3 +1,13 @@
+<?php
+function SelectTaskColor($priority) {
+    if ($priority == 'High'){
+        return '#dc3545';
+    } else if ($priority == 'Normal'){
+        return '#28a745';
+    }
+    return '#ffc107';
+}
+?>
 <html lang="en">
 
 <head>
@@ -38,9 +48,9 @@
         <?php if (!empty($Tasks)): ?>
             <ul class="list-group">
                 <?php foreach ($Tasks as $task): ?>
-                    <li class="list-group-item d-flex align-items-center">
+                    <li class="list-group-item d-flex align-items-center" style="background-color: <?php echo SelectTaskColor($task['priority']); ?>;">
                         <form method="POST" action="todo/check" class="w-100 m-0 p-0">
-                            <div class="form-check">
+                            <div class="form-check" >
                                 <input type="hidden" name="taskId" value="<?php echo $task['task_id']; ?>">
                                 <input
                                     class="form-check-input"
@@ -64,7 +74,10 @@
 <?php require_once ($_SERVER['DOCUMENT_ROOT'].'/JournalApp/App/views/components/footer.php') ?>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+
+
+    </script>
 </body>
 
 </html>
