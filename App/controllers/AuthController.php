@@ -20,8 +20,8 @@ class AuthController extends Controller{
          header("Location: /JOURNALAPP/public/home");
         exit;
         }else{
-            header("location: /JOURNALAPP/public/login?error=1");
-            exit;
+           $errorMessage = "Invalid username or password";
+           $this->view("auth/login", ["errorMessage" => $errorMessage]);
         }
        
     }
@@ -31,16 +31,25 @@ class AuthController extends Controller{
     }
 
     public function register(){
+        $userModel = new User();
         $username =$_POST['username'];
         $email =$_POST['email'];
         $password = $_POST['password'];
-         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $confirm_password = $_POST['confirm_password'];
+        $userExist = $userModel->findByEmail($email);
+        if ($password != $confirm_password) {
+            $errorMessage = "Passwords do not match";
+            $this->view("auth/register", ["errorMessage" => $errorMessage]);
+        }else if (isset($userExist)){
+            $errorMessage = "This email is already registered";
+            $this->view("auth/register", ["errorMessage" => $errorMessage]);
+        }else{
+            $userModel->registerUser($username,$email,$hashedPassword);
+            header("Location: /JOURNALAPP/public/login");
+            exit;
+        }
 
-        $userModel = new User();
-
-        $user = $userModel->registerUser($username,$email,$hashedPassword);
-        header("Location: /JOURNALAPP/public/login");
-        exit;
     }
 
     public function logout() {

@@ -10,6 +10,12 @@
     <div class="card shadow-sm p-4" style="width: 100%; max-width: 400px;">
         <h3 class="card-title text-center mb-4">Login</h3>
         <p>Prove that i know you !</p>
+        <?php if (isset($errorMessage)):?>
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Oh oh!</strong> <?php echo $errorMessage ?>
+            </div>
+        <?php endif;?>
         <form method="POST" action="login">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
@@ -19,6 +25,7 @@
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
+
             </div>
 
             <button type="submit" class="btn btn-dark w-100 mt-2">Login</button>

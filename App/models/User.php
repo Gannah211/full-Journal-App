@@ -12,10 +12,16 @@ class User extends Model {
         $stmt->execute([$username, $email, $password]);
         echo "New record created successfully.";
     }
-
     public function findById($id){
         $stmt = $this->db->prepare("SELECT * FROM users WHERE id = ?");
         $stmt->execute([$id]);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function findByemail($email){
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->execute([$email]);
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
